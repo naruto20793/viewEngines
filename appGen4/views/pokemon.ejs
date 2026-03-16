@@ -163,6 +163,58 @@
             padding-left: 1.2rem;
         }
 
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .page-btn {
+            display: inline-block;
+            padding: 10px 15px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            text-decoration: none;
+            border-radius: 8px;
+            border: 2px solid rgba(102, 126, 234, 0.3);
+            transition: all 0.3s ease;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .page-btn:hover {
+            background: rgba(102, 126, 234, 0.8);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+
+        .current-page {
+            background: rgba(102, 126, 234, 0.9);
+            color: white;
+            border-color: rgba(102, 126, 234, 0.9);
+            cursor: default;
+        }
+
+        .page-numbers {
+            display: flex;
+            gap: 8px;
+        }
+
+        .prev-btn, .next-btn {
+            font-weight: bold;
+            background: rgba(255, 255, 255, 0.95);
+            border-color: rgba(52, 152, 219, 0.4);
+        }
+
+        .prev-btn:hover, .next-btn:hover {
+            background: rgba(52, 152, 219, 0.8);
+        }
+
         @keyframes fadeInDown {
             from {
                 opacity: 0;
@@ -174,50 +226,6 @@
             }
         }
 
-        .pagination {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-            margin-top: 40px;
-            margin-bottom: 20px;
-        }
-
-        .page-btn {
-            display: inline-block;
-            padding: 12px 20px;
-            background: rgba(255, 255, 255, 0.9);
-            color: #333;
-            text-decoration: none;
-            border-radius: 25px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .page-btn:hover {
-            background: rgba(255, 255, 255, 1);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-        }
-
-        .current-page {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            cursor: default;
-        }
-
-        .current-page:hover {
-            transform: none;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-
-        .page-numbers {
-            display: flex;
-            gap: 8px;
-        }
-
         @media (max-width: 768px) {
             h1 {
                 font-size: 2rem;
@@ -226,8 +234,12 @@
                 grid-template-columns: 1fr;
             }
             .pagination {
-                flex-direction: column;
-                gap: 10px;
+                flex-wrap: wrap;
+                gap: 5px;
+            }
+            .page-btn {
+                padding: 8px 12px;
+                font-size: 0.9rem;
             }
         }
     </style>
@@ -270,7 +282,7 @@
                 </div>
             <% }); %>
         </div>
-        
+
         <!-- Controles de Paginação -->
         <div class="pagination">
             <% if (hasPrev) { %>
@@ -288,7 +300,7 @@
             </div>
             
             <% if (hasNext) { %>
-                <a href="?page=<%= nextPage %>" class="page-btn next-btn">Próxima →</a>
+                <a href="?page=<%= nextPage %>" class="page-btn next-btn">Próximo →</a>
             <% } %>
         </div>
     </div>

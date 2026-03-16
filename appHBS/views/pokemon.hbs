@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= title %></title>
+    <title>{{title}}</title>
     <style>
         * {
             margin: 0;
@@ -23,14 +23,6 @@
             margin: 0 auto;
         }
 
-        .intro {
-            text-align: center;
-            color: rgba(255,255,255,0.9);
-            margin-bottom: 20px;
-            font-size: 1.1rem;
-            line-height: 1.4;
-        }
-
         h1 {
             text-align: center;
             color: white;
@@ -40,42 +32,34 @@
             animation: fadeInDown 1s ease-out;
         }
 
+        .intro {
+            text-align: center;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            line-height: 1.4;
+        }
+
         .pokemon-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
         }
 
+        .pokemon-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            animation: fadeInDown 0.6s ease-out both;
+        }
+
         .pokemon-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-        }
-
-        .pokemon-name {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 10px;
-            text-align: center;
-        }
-
-        .pokemon-type {
-            display: inline-block;
-            background: linear-gradient(45deg, #ff6b6b, #ffa500);
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: bold;
-            margin-bottom: 15px;
-            text-align: center;
-        }
-
-        .pokemon-description {
-            color: #666;
-            line-height: 1.6;
-            text-align: center;
-            margin: 15px 0;
         }
 
         .pokemon-card-header {
@@ -132,15 +116,23 @@
             flex-wrap: wrap;
         }
 
-        .pokemon-card {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            animation: fadeInDown 0.6s ease-out both;
+        .pokemon-type {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff6b6b, #ffa500);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .pokemon-description {
+            color: #666;
+            line-height: 1.6;
+            text-align: center;
+            margin: 15px 0;
         }
 
         .pokemon-specs {
@@ -163,6 +155,46 @@
             padding-left: 1.2rem;
         }
 
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+
+        .page-btn {
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid rgba(102, 126, 234, 0.3);
+            color: #667eea;
+            padding: 10px 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .page-btn:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .page-btn.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .page-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
         @keyframes fadeInDown {
             from {
                 opacity: 0;
@@ -174,50 +206,6 @@
             }
         }
 
-        .pagination {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-            margin-top: 40px;
-            margin-bottom: 20px;
-        }
-
-        .page-btn {
-            display: inline-block;
-            padding: 12px 20px;
-            background: rgba(255, 255, 255, 0.9);
-            color: #333;
-            text-decoration: none;
-            border-radius: 25px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .page-btn:hover {
-            background: rgba(255, 255, 255, 1);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-        }
-
-        .current-page {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            cursor: default;
-        }
-
-        .current-page:hover {
-            transform: none;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-
-        .page-numbers {
-            display: flex;
-            gap: 8px;
-        }
-
         @media (max-width: 768px) {
             h1 {
                 font-size: 2rem;
@@ -225,71 +213,68 @@
             .pokemon-grid {
                 grid-template-columns: 1fr;
             }
-            .pagination {
-                flex-direction: column;
-                gap: 10px;
-            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1><%= title %></h1>
+        <h1>{{title}}</h1>
         <p class="intro">Aqui você encontra uma mini enciclopédia com informações detalhadas de cada Pokémon: tipos, habilidades, medidas e curiosidades.</p>
         <div class="pokemon-grid">
-            <% pokemons.forEach(pokemon => { %>
+            {{#each pokemons}}
                 <div class="pokemon-card">
                     <div class="pokemon-card-header">
-                        <img class="pokemon-image" src="<%= pokemon.image %>" alt="<%= pokemon.name %>">
+                        <img class="pokemon-image" src="{{this.image}}" alt="{{this.name}}">
                         <div class="pokemon-card-title">
-                            <h2 class="pokemon-name"><%= pokemon.name %></h2>
+                            <h2 class="pokemon-name">{{this.name}}</h2>
                             <div class="pokemon-meta">
-                                <span class="pokemon-number">#<%= pokemon.number %></span>
-                                <span class="pokemon-category"><%= pokemon.category %></span>
+                                <span class="pokemon-number">#{{this.number}}</span>
+                                <span class="pokemon-category">{{this.category}}</span>
                             </div>
                             <div class="pokemon-types">
-                                <% pokemon.type.forEach(type => { %>
-                                    <span class="pokemon-type"><%= type %></span>
-                                <% }); %>
+                                {{#each this.type}}
+                                    <span class="pokemon-type">{{this}}</span>
+                                {{/each}}
                             </div>
                         </div>
                     </div>
-                    <p class="pokemon-description"><%= pokemon.description %></p>
+                    <p class="pokemon-description">{{this.description}}</p>
                     <div class="pokemon-specs">
-                        <div><strong>Altura:</strong> <%= pokemon.height %></div>
-                        <div><strong>Peso:</strong> <%= pokemon.weight %></div>
+                        <div><strong>Altura:</strong> {{this.height}}</div>
+                        <div><strong>Peso:</strong> {{this.weight}}</div>
                     </div>
                     <div class="pokemon-abilities">
                         <strong>Habilidades:</strong>
                         <ul>
-                            <% pokemon.abilities.forEach(ability => { %>
-                                <li><%= ability %></li>
-                            <% }); %>
+                            {{#each this.abilities}}
+                                <li>{{this}}</li>
+                            {{/each}}
                         </ul>
                     </div>
                 </div>
-            <% }); %>
+            {{/each}}
         </div>
-        
-        <!-- Controles de Paginação -->
+
         <div class="pagination">
-            <% if (hasPrev) { %>
-                <a href="?page=<%= prevPage %>" class="page-btn prev-btn">← Anterior</a>
-            <% } %>
-            
-            <div class="page-numbers">
-                <% for (let i = Math.max(1, currentPage - 2); i <= Math.min(totalPages, currentPage + 2); i++) { %>
-                    <% if (i === currentPage) { %>
-                        <span class="page-btn current-page"><%= i %></span>
-                    <% } else { %>
-                        <a href="?page=<%= i %>" class="page-btn"><%= i %></a>
-                    <% } %>
-                <% } %>
-            </div>
-            
-            <% if (hasNext) { %>
-                <a href="?page=<%= nextPage %>" class="page-btn next-btn">Próxima →</a>
-            <% } %>
+            {{#if hasPrev}}
+                <a href="?page={{prevPage}}" class="page-btn">← Anterior</a>
+            {{else}}
+                <span class="page-btn disabled">← Anterior</span>
+            {{/if}}
+
+            {{#each (range 1 totalPages)}}
+                {{#if (eq this ../currentPage)}}
+                    <span class="page-btn active">{{this}}</span>
+                {{else}}
+                    <a href="?page={{this}}" class="page-btn">{{this}}</a>
+                {{/if}}
+            {{/each}}
+
+            {{#if hasNext}}
+                <a href="?page={{nextPage}}" class="page-btn">Próximo →</a>
+            {{else}}
+                <span class="page-btn disabled">Próximo →</span>
+            {{/if}}
         </div>
     </div>
 </body>
